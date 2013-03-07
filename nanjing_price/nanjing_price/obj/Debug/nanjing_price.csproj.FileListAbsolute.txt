@@ -1,0 +1,10 @@
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\obj\Debug\nanjing_price.csprojResolveAssemblyReference.cache
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\nanjing_price.exe.config
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\nanjing_price.exe
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\nanjing_price.pdb
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\mysql.data.dll
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\mysql.visualstudio.dll
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\mysql.web.dll
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\obj\Debug\nanjing_price.exe
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\obj\Debug\nanjing_price.pdb
+F:\iFile\Visual Studio\2013\南京物价数据库\nanjing_price\nanjing_price\bin\Debug\Winista.HtmlParser.dll

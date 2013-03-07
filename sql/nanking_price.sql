@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2013-03-07 13:37:49
+Date: 2013-03-07 20:54:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,8 +50,8 @@ INSERT INTO `district` VALUES ('15', null);
 DROP TABLE IF EXISTS `get_log`;
 CREATE TABLE `get_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '采集序列，自增',
-  `get_url` varchar(300) DEFAULT NULL COMMENT '采集地址',
-  `get_id` varchar(20) DEFAULT NULL COMMENT '采集页面id',
+  `gain_url` varchar(300) DEFAULT NULL COMMENT '采集地址',
+  `gain_id` varchar(20) DEFAULT NULL COMMENT '采集页面id',
   `type_id` int(11) DEFAULT NULL COMMENT '采集价格类型',
   `type_name` varchar(50) DEFAULT NULL COMMENT '采集价格类型名称',
   PRIMARY KEY (`id`)

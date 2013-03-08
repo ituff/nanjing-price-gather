@@ -15,17 +15,18 @@ namespace org.nutlab
 		{}
 		#region Model
 		private long _id;
-		private int? _type_id;
+		private int _type_id;
 		private string _type_name;
 		private string _name;
 		private string _standard;
 		private string _unit;
-		private int? _district_id;
+		private int _district_id;
 		private string _district_name;
-		private int? _market_id;
+		private int _market_id;
 		private string _market_name;
-		private DateTime? _publish_time;
-		private DateTime? _get_time;
+		private string _amount;
+		private DateTime _publish_time;
+		private DateTime _get_time;
 		private string _get_url;
 		private string _reserve1;
 		private string _reserve2;
@@ -40,7 +41,7 @@ namespace org.nutlab
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? type_id
+		public int type_id
 		{
 			set{ _type_id=value;}
 			get{return _type_id;}
@@ -80,7 +81,7 @@ namespace org.nutlab
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? district_id
+		public int district_id
 		{
 			set{ _district_id=value;}
 			get{return _district_id;}
@@ -96,7 +97,7 @@ namespace org.nutlab
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? market_id
+		public int market_id
 		{
 			set{ _market_id=value;}
 			get{return _market_id;}
@@ -112,7 +113,15 @@ namespace org.nutlab
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? publish_time
+		public string amount
+		{
+			set{ _amount=value;}
+			get{return _amount;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime publish_time
 		{
 			set{ _publish_time=value;}
 			get{return _publish_time;}
@@ -120,7 +129,7 @@ namespace org.nutlab
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? get_time
+		public DateTime get_time
 		{
 			set{ _get_time=value;}
 			get{return _get_time;}
@@ -160,8 +169,8 @@ namespace org.nutlab
 		public good_price(long id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,type_id,type_name,name,standard,unit,district_id,district_name,market_id,market_name,publish_time,get_time,get_url,reserve1,reserve2 ");
-			strSql.Append(" FROM [good_price] ");
+			strSql.Append("select id,type_id,type_name,name,standard,unit,district_id,district_name,market_id,market_name,amount,publish_time,get_time,get_url,reserve1,reserve2 ");
+			strSql.Append(" FROM `good_price` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -207,6 +216,10 @@ namespace org.nutlab
 				{
 					this.market_name=ds.Tables[0].Rows[0]["market_name"].ToString();
 				}
+				if(ds.Tables[0].Rows[0]["amount"]!=null)
+				{
+					this.amount=ds.Tables[0].Rows[0]["amount"].ToString();
+				}
 				if(ds.Tables[0].Rows[0]["publish_time"]!=null && ds.Tables[0].Rows[0]["publish_time"].ToString()!="")
 				{
 					this.publish_time=DateTime.Parse(ds.Tables[0].Rows[0]["publish_time"].ToString());
@@ -236,7 +249,7 @@ namespace org.nutlab
 		public bool Exists(long id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) from [good_price]");
+			strSql.Append("select count(1) from `good_price`");
 			strSql.Append(" where id=@id ");
 
 			MySqlParameter[] parameters = {
@@ -253,21 +266,22 @@ namespace org.nutlab
 		public void Add()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into [good_price] (");
-			strSql.Append("type_id,type_name,name,standard,unit,district_id,district_name,market_id,market_name,publish_time,get_time,get_url,reserve1,reserve2)");
+			strSql.Append("insert into `good_price` (");
+			strSql.Append("type_id,type_name,name,standard,unit,district_id,district_name,market_id,market_name,amount,publish_time,get_time,get_url,reserve1,reserve2)");
 			strSql.Append(" values (");
-			strSql.Append("@type_id,@type_name,@name,@standard,@unit,@district_id,@district_name,@market_id,@market_name,@publish_time,@get_time,@get_url,@reserve1,@reserve2)");
+			strSql.Append("@type_id,@type_name,@name,@standard,@unit,@district_id,@district_name,@market_id,@market_name,@amount,@publish_time,@get_time,@get_url,@reserve1,@reserve2)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@type_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@type_name", MySqlDbType.VarChar,50),
 					new MySqlParameter("@name", MySqlDbType.VarChar,50),
-					new MySqlParameter("@standard", MySqlDbType.VarChar,10),
+					new MySqlParameter("@standard", MySqlDbType.VarChar,100),
 					new MySqlParameter("@unit", MySqlDbType.VarChar,10),
 					new MySqlParameter("@district_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@district_name", MySqlDbType.VarChar,20),
 					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@market_name", MySqlDbType.VarChar,50),
-					new MySqlParameter("@publish_time", MySqlDbType.Date),
+					new MySqlParameter("@amount", MySqlDbType.VarChar,20),
+					new MySqlParameter("@publish_time", MySqlDbType.DateTime),
 					new MySqlParameter("@get_time", MySqlDbType.DateTime),
 					new MySqlParameter("@get_url", MySqlDbType.VarChar,300),
 					new MySqlParameter("@reserve1", MySqlDbType.VarChar,500),
@@ -281,11 +295,12 @@ namespace org.nutlab
 			parameters[6].Value = district_name;
 			parameters[7].Value = market_id;
 			parameters[8].Value = market_name;
-			parameters[9].Value = publish_time;
-			parameters[10].Value = get_time;
-			parameters[11].Value = get_url;
-			parameters[12].Value = reserve1;
-			parameters[13].Value = reserve2;
+			parameters[9].Value = amount;
+			parameters[10].Value = publish_time;
+			parameters[11].Value = get_time;
+			parameters[12].Value = get_url;
+			parameters[13].Value = reserve1;
+			parameters[14].Value = reserve2;
 
 			DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 		}
@@ -295,7 +310,7 @@ namespace org.nutlab
 		public bool Update()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update [good_price] set ");
+			strSql.Append("update `good_price` set ");
 			strSql.Append("type_id=@type_id,");
 			strSql.Append("type_name=@type_name,");
 			strSql.Append("name=@name,");
@@ -305,6 +320,7 @@ namespace org.nutlab
 			strSql.Append("district_name=@district_name,");
 			strSql.Append("market_id=@market_id,");
 			strSql.Append("market_name=@market_name,");
+			strSql.Append("amount=@amount,");
 			strSql.Append("publish_time=@publish_time,");
 			strSql.Append("get_time=@get_time,");
 			strSql.Append("get_url=@get_url,");
@@ -321,7 +337,8 @@ namespace org.nutlab
 					new MySqlParameter("@district_name", MySqlDbType.VarChar,20),
 					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@market_name", MySqlDbType.VarChar,50),
-					new MySqlParameter("@publish_time", MySqlDbType.Date),
+					new MySqlParameter("@amount", MySqlDbType.VarChar,20),
+					new MySqlParameter("@publish_time", MySqlDbType.DateTime),
 					new MySqlParameter("@get_time", MySqlDbType.DateTime),
 					new MySqlParameter("@get_url", MySqlDbType.VarChar,300),
 					new MySqlParameter("@reserve1", MySqlDbType.VarChar,500),
@@ -336,12 +353,13 @@ namespace org.nutlab
 			parameters[6].Value = district_name;
 			parameters[7].Value = market_id;
 			parameters[8].Value = market_name;
-			parameters[9].Value = publish_time;
-			parameters[10].Value = get_time;
-			parameters[11].Value = get_url;
-			parameters[12].Value = reserve1;
-			parameters[13].Value = reserve2;
-			parameters[14].Value = id;
+			parameters[9].Value = amount;
+			parameters[10].Value = publish_time;
+			parameters[11].Value = get_time;
+			parameters[12].Value = get_url;
+			parameters[13].Value = reserve1;
+			parameters[14].Value = reserve2;
+			parameters[15].Value = id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -360,7 +378,7 @@ namespace org.nutlab
 		public bool Delete(long id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from [good_price] ");
+			strSql.Append("delete from `good_price` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -384,8 +402,8 @@ namespace org.nutlab
 		public void GetModel(long id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,type_id,type_name,name,standard,unit,district_id,district_name,market_id,market_name,publish_time,get_time,get_url,reserve1,reserve2 ");
-			strSql.Append(" FROM [good_price] ");
+			strSql.Append("select id,type_id,type_name,name,standard,unit,district_id,district_name,market_id,market_name,amount,publish_time,get_time,get_url,reserve1,reserve2 ");
+			strSql.Append(" FROM `good_price` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -434,6 +452,10 @@ namespace org.nutlab
 				{
 					this.market_name=ds.Tables[0].Rows[0]["market_name"].ToString();
 				}
+				if(ds.Tables[0].Rows[0]["amount"]!=null )
+				{
+					this.amount=ds.Tables[0].Rows[0]["amount"].ToString();
+				}
 				if(ds.Tables[0].Rows[0]["publish_time"]!=null && ds.Tables[0].Rows[0]["publish_time"].ToString()!="")
 				{
 					this.publish_time=DateTime.Parse(ds.Tables[0].Rows[0]["publish_time"].ToString());
@@ -464,7 +486,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select * ");
-			strSql.Append(" FROM [good_price] ");
+			strSql.Append(" FROM `good_price` ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);

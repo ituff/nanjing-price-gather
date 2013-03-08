@@ -10,8 +10,9 @@ namespace nanjing_price
     {
         static void Main(string[] args)
         {
-            
-            NanjingMain nk = new NanjingMain("http://www.njprice.com/col71/col464/articleinfo.php?infoid=44181");
+            Console.WriteLine("南京物价采集DEMO\n输入网址：");
+            NanjingMain nk = new NanjingMain(Console.ReadLine());
+            Console.WriteLine("倒入数据成功！");
             Console.ReadLine();
         }
     }

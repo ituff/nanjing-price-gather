@@ -53,7 +53,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select id,time,content ");
-			strSql.Append(" FROM [sys_log] ");
+			strSql.Append(" FROM `sys_log` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -80,7 +80,7 @@ namespace org.nutlab
 		public bool Exists(long id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) from [sys_log]");
+			strSql.Append("select count(1) from `sys_log`");
 			strSql.Append(" where id=@id ");
 
 			MySqlParameter[] parameters = {
@@ -97,7 +97,7 @@ namespace org.nutlab
 		public void Add()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into [sys_log] (");
+			strSql.Append("insert into `sys_log` (");
 			strSql.Append("time,content)");
 			strSql.Append(" values (");
 			strSql.Append("@time,@content)");
@@ -115,7 +115,7 @@ namespace org.nutlab
 		public bool Update()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update [sys_log] set ");
+			strSql.Append("update `sys_log` set ");
 			strSql.Append("time=@time,");
 			strSql.Append("content=@content");
 			strSql.Append(" where id=@id ");
@@ -144,7 +144,7 @@ namespace org.nutlab
 		public bool Delete(long id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from [sys_log] ");
+			strSql.Append("delete from `sys_log` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -169,7 +169,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select id,time,content ");
-			strSql.Append(" FROM [sys_log] ");
+			strSql.Append(" FROM `sys_log` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -200,7 +200,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select * ");
-			strSql.Append(" FROM [sys_log] ");
+			strSql.Append(" FROM `sys_log` ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);

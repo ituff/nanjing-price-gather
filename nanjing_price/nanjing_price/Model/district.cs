@@ -44,7 +44,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select id,name ");
-			strSql.Append(" FROM [district] ");
+			strSql.Append(" FROM `district` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -79,7 +79,7 @@ namespace org.nutlab
 		public bool Exists(int id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) from [district]");
+			strSql.Append("select count(1) from `district`");
 			strSql.Append(" where id=@id ");
 
 			MySqlParameter[] parameters = {
@@ -96,7 +96,7 @@ namespace org.nutlab
 		public void Add()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into [district] (");
+			strSql.Append("insert into `district` (");
 			strSql.Append("name)");
 			strSql.Append(" values (");
 			strSql.Append("@name)");
@@ -112,7 +112,7 @@ namespace org.nutlab
 		public bool Update()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update [district] set ");
+			strSql.Append("update `district` set ");
 			strSql.Append("name=@name");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
@@ -138,7 +138,7 @@ namespace org.nutlab
 		public bool Delete(int id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from [district] ");
+			strSql.Append("delete from `district` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -163,7 +163,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select id,name ");
-			strSql.Append(" FROM [district] ");
+			strSql.Append(" FROM `district` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -190,7 +190,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select * ");
-			strSql.Append(" FROM [district] ");
+			strSql.Append(" FROM `district` ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);

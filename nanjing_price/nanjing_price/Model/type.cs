@@ -44,7 +44,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select id,name ");
-			strSql.Append(" FROM [type] ");
+			strSql.Append(" FROM `type` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -79,7 +79,7 @@ namespace org.nutlab
 		public bool Exists(int id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) from [type]");
+			strSql.Append("select count(1) from `type`");
 			strSql.Append(" where id=@id ");
 
 			MySqlParameter[] parameters = {
@@ -96,7 +96,7 @@ namespace org.nutlab
 		public void Add()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into [type] (");
+			strSql.Append("insert into `type` (");
 			strSql.Append("name)");
 			strSql.Append(" values (");
 			strSql.Append("@name)");
@@ -112,7 +112,7 @@ namespace org.nutlab
 		public bool Update()
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update [type] set ");
+			strSql.Append("update `type` set ");
 			strSql.Append("name=@name");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
@@ -138,7 +138,7 @@ namespace org.nutlab
 		public bool Delete(int id)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from [type] ");
+			strSql.Append("delete from `type` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -163,7 +163,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select id,name ");
-			strSql.Append(" FROM [type] ");
+			strSql.Append(" FROM `type` ");
 			strSql.Append(" where id=@id ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)};
@@ -190,7 +190,7 @@ namespace org.nutlab
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select * ");
-			strSql.Append(" FROM [type] ");
+			strSql.Append(" FROM `type` ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);
